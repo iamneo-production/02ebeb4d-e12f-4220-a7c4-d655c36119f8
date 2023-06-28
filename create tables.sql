@@ -19,3 +19,9 @@ create table shipper(
   shipper_id char(6) primary key,
   sh_name varchar(20) not null;
 
+create table location(
+  pincode number(6) primary key,
+  state varchar2(20) not null,
+  city varchar2(20) not null,
+  area_name varchar2(20) not null
+);
