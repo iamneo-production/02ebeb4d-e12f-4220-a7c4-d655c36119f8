@@ -10,3 +10,6 @@ create table seller(seller_id CHAR(20) PRIMARY KEY,s_name VARCHAR2(20));
 create table  deal(
   deal_id char(6) primary key,
   dis_percentage int not null );
+create table brand(
+  brand_id char(6) primary key,
+  b_name varchar(20) not null);
