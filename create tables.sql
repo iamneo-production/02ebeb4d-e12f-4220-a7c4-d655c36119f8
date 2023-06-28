@@ -18,3 +18,4 @@ create table brand(
 create table shipper(
   shipper_id char(6) primary key,
   sh_name varchar(20) not null;
+
