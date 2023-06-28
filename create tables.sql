@@ -13,3 +13,8 @@ create table  deal(
 create table brand(
   brand_id char(6) primary key,
   b_name varchar(20) not null);
+
+
+create table shipper(
+  shipper_id char(6) primary key,
+  sh_name varchar(20) not null;
