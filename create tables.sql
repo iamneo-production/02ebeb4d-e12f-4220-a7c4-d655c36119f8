@@ -11,6 +11,11 @@ create table  deal(
   deal_id char(6) primary key,
   dis_percentage int not null );
 
+create table category(
+  category_id char(5) primary key,
+  c_name varchar(20) not null,
+  sup_category varchar(20) foreign key references category(category_id)
+);
 create table brand(
   brand_id char(6) primary key,
   b_name varchar(20) not null);
