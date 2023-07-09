@@ -1,3 +1,8 @@
 select * from ecommerce;
 
-select country,count(*) from ecommerce group by country
+select country,count(*) from ecommerce group by country;
+
+
+select * from ecommerce;
+
+
