@@ -1,1 +1,1 @@
-select * from ecommerce;
+select * from ECOMMERCE;
