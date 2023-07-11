@@ -1,0 +1,6 @@
+select * from ECOMMERCE;
+
+desc ECOMMERCE;
+
+select PRODUCTNAME,PRODUCTNO
+FROM ECOMMERCE;
