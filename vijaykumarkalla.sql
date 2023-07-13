@@ -9,11 +9,12 @@ Select
 sum(QUANTITY) as TotalProductsSold FROM
  ECOMMERCE WHERE "Date" >='2019-02-01'
   and "Date"<'2019-03-01';
-
+ 
 
 -- 2.query to Total sale amount in each year
 
---  SELECT EXTRACT(YEAR FROM  TO_DATE("Date",'YYYY-MM-DD')) From ECOMMERCE; /*date extraction method in oracle*/
+--  SELECT EXTRACT(YEAR FROM  TO_DATE("Date",'YYYY-MM-DD')) From ECOMMERCE; /*date extraction method */
+
 
 Select EXTRACT(YEAR FROM  TO_DATE("Date",'YYYY-MM-DD')) as "YEAR" , 
     sum(PRICE*QUANTITY) as TotalSaleAmount from ECOMMERCE 
@@ -35,5 +36,9 @@ select COUNTRY,Count(Distinct(CUSTOMERNO)) as CUSTOMER
 from ECOMMERCE Group By COUNTRY;
 
 
-
+-- Query for all the Unique products name sold in each year
+ 
+ Select DISTINCT(PRODUCTNAME) as UniqueProductName,
+ Extract(YEAR From To_DATE("Date",'YYYY-MM-DD')) as "YEAR" FROM ECOMMERCE
+ Order By Extract(YEAR From To_DATE("Date",'YYYY-MM-DD'));
 
