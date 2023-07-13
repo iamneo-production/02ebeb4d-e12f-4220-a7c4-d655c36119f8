@@ -23,4 +23,7 @@ Select EXTRACT(YEAR FROM  TO_DATE("Date",'YYYY-MM-DD')) as "YEAR" ,
 
 --  3.Query to find what was the total sales amount of each product on a month wise basis in 2019
 
-
+ select PRODUCTNO,Extract(Month From To_DATE("Date",'YYYY-MM-DD')) as "Month",
+  sum(PRICE*QUANTITY) as SALESAMOUNT from ECOMMERCE
+  where Extract(YEAR From To_DATE("Date",'YYYY-MM-DD'))=2019 
+  group by PRODUCTNO,Extract(Month From To_DATE("Date",'YYYY-MM-DD'));
