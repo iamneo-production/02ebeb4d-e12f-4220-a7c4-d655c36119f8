@@ -27,7 +27,7 @@ AND "Date" <'2019-03-01';
 --(4.sql query to count the customers from each country)
 
 
-
+select COUNT (country) from ecommerce group by country;
 
 
 
