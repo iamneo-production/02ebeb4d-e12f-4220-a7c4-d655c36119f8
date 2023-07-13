@@ -34,3 +34,6 @@ Select EXTRACT(YEAR FROM  TO_DATE("Date",'YYYY-MM-DD')) as "YEAR" ,
 select COUNTRY,Count(Distinct(CUSTOMERNO)) as CUSTOMER 
 from ECOMMERCE Group By COUNTRY;
 
+
+
+
