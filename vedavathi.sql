@@ -1,30 +1,16 @@
-select * from ECOMMERCE;
-
-select MON_FIELD from ECOMMERCE;
-select "Date" from ECOMMERCE;
-select YEAR_FIELD from ECOMMERCE;
-
-desc ECOMMERCE;
-select "Date"  from ECOMMERCE where "Date" like '2019-02-%';
-select SUBSTR("Date",1,7) from ECOMMERCE;
-select EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD')) AS YEAR FROM ECOMMERCE;
 
 /* 1.  write an sql query to how many products were sold in february 2019 ?*/
 
-/* select sum(QUANTITY) total_products_sold from(
-    select QUANTITY ,MON_FIELD,YEAR_FIELD from ECOMMERCE where MON_FIELD=2 and YEAR_FIELD=2019);
-    using sub query*/
 
-    select sum(QUANTITY) total_products_sold from ECOMMERCE where "Date" like '2019-02%';
+ select sum(QUANTITY) total_products_sold from ECOMMERCE where "Date" like '2019-02%';
 
- 
-/*select distinct(sum(QUANTITY) over(partition by MON_FIELD,YEAR_FIELD)) total_products_sold from ECOMMERCE
-where MON_FIELD=2 and YEAR_FIELD=2019; using over clause*/
+SELECT SUM(QUANTITY) total_products_sold FROM ECOMMERCE WHERE EXTRACT(YEAR FROM TO_DATE("Date",'YYYY-MM-DD'))=2019 AND EXTRACT(MONTH from TO_DATE("Date",'YYYY-MM-DD'))=02;
+
  select distinct(sum(QUANTITY) over(PARTITION by year_month)) total_products_sold,year_month from(
      select quantity,SUBSTR("Date",1,7) year_month from ECOMMERCE) where year_month='2019-02';
 
 SELECT DISTINCT(SUM(quantity) OVER(PARTITION BY EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD')),
-EXTRACT(MONTH from TO_DATE("Date",'YYYY-MM-DD')))) total_products_sold FROM ECOMMERCE WHERE EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD'))=2019AND
+EXTRACT(MONTH from TO_DATE("Date",'YYYY-MM-DD')))) total_products_sold FROM ECOMMERCE WHERE EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD'))=2019 AND
 EXTRACT(MONTH from TO_DATE("Date",'YYYY-MM-DD'))=02 ;
 
 
@@ -53,6 +39,13 @@ SELECT DISTINCT(SUM(QUANTITY*PRICE) OVER(PARTITION BY EXTRACT(MONTH FROM TO_DATE
 SELECT DISTINCT(SUM(QUANTITY*PRICE) OVER(PARTITION BY EXTRACT(MONTH FROM TO_DATE("Date",'YYYY-MM-DD') ),PRODUCTNAME)) MON_SALES,PRODUCTNAME,
  EXTRACT(MONTH FROM TO_DATE("Date",'YYYY-MM-DD')) AS MONTH FROM ECOMMERCE WHERE "Date" LIKE '2019%' 
     ORDER BY  EXTRACT(MONTH FROM TO_DATE("Date",'YYYY-MM-DD'));
+    
+    
+select EXTRACT(Month FROM TO_DATE("Date", 'YYYY-MM-DD'))AS sales_month, PRODUCTNAME,
+SUM(PRICE * QUANTITY) AS total_sales_amount
+FROM ECOMMERCE
+WHERE EXTRACT(YEAR FROM TO_DATE("Date", 'YYYY-MM-DD')) = 2019
+GROUP BY EXTRACT(MONTH FROM TO_DATE("Date", 'YYYY-MM-DD')),PRODUCTNAME ORDER BY  EXTRACT(MONTH FROM TO_DATE("Date",'YYYY-MM-DD')) ;
 
 /* 4. write a sql query to count cutomers from each country?*/
 select count(CUSTOMERNO) total_customers, country from ecommerce group by country order by country;
@@ -63,3 +56,7 @@ select distinct(count(CUSTOMERNO) over(partition by COUNTRY)) total_customers, c
 /* 5. write an sql query to list all unique product names sold from each year?*/
 select distinct(PRODUCTNAME),EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD')) AS YEAR from ECOMMERCE 
 order by EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD'));
+
+SELECT EXTRACT(YEAR FROM TO_DATE("Date", 'YYYY-MM-DD')) AS sales_year, PRODUCTNAME AS unique_product_names
+FROM ecommerce
+GROUP BY EXTRACT(YEAR FROM TO_DATE("Date", 'YYYY-MM-DD')) , PRODUCTNAME order by EXTRACT(YEAR FROM TO_DATE("Date", 'YYYY-MM-DD')) ;
