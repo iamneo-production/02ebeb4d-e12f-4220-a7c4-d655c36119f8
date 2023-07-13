@@ -27,3 +27,10 @@ Select EXTRACT(YEAR FROM  TO_DATE("Date",'YYYY-MM-DD')) as "YEAR" ,
   sum(PRICE*QUANTITY) as SALESAMOUNT from ECOMMERCE
   where Extract(YEAR From To_DATE("Date",'YYYY-MM-DD'))=2019 
   group by PRODUCTNO,Extract(Month From To_DATE("Date",'YYYY-MM-DD'));
+
+
+--   4.query to count customers of each country
+
+select COUNTRY,Count(Distinct(CUSTOMERNO)) as CUSTOMER 
+from ECOMMERCE Group By COUNTRY;
+
