@@ -7,8 +7,8 @@ SELECT country  FROM ECOMMERCE;
 SET TIMING ON;
 Select
 sum(QUANTITY) as TotalProductsSold FROM
- ECOMMERCE WHERE "Date" >='2019-02-01'
-  and "Date"<'2019-03-01';
+ ECOMMERCE WHERE PURCHASE_DATE >='2019-02-01'
+  and PURCHASE_DATE<'2019-03-01';
  
 
 -- 2.query to Total sale amount in each year
@@ -16,18 +16,17 @@ sum(QUANTITY) as TotalProductsSold FROM
 --  SELECT EXTRACT(YEAR FROM  TO_DATE("Date",'YYYY-MM-DD')) From ECOMMERCE; /*date extraction method */
 
 
-Select EXTRACT(YEAR FROM  TO_DATE("Date",'YYYY-MM-DD')) as "YEAR" , 
+Select EXTRACT(YEAR FROM  TO_DATE("PURCHASE_DATE",'YYYY-MM-DD')) as "YEAR" , 
     sum(PRICE*QUANTITY) as TotalSaleAmount from ECOMMERCE 
-        group by EXTRACT(YEAR FROM  TO_DATE("Date",'YYYY-MM-DD'));
- 
+        group by EXTRACT(YEAR FROM  TO_DATE("PURCHASE_DATE",'YYYY-MM-DD'));
 
 
 --  3.Query to find what was the total sales amount of each product on a month wise basis in 2019
 
- select PRODUCTNO,Extract(Month From To_DATE("Date",'YYYY-MM-DD')) as "Month",
+ select PRODUCTNO,Extract(Month From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')) as "Month",
   sum(PRICE*QUANTITY) as SALESAMOUNT from ECOMMERCE
-  where Extract(YEAR From To_DATE("Date",'YYYY-MM-DD'))=2019 
-  group by PRODUCTNO,Extract(Month From To_DATE("Date",'YYYY-MM-DD'));
+  where Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD'))=2019 
+  group by PRODUCTNO,Extract(Month From To_DATE("PURCHASE_DATE",'YYYY-MM-DD'));
 
 
 --   4.query to count customers of each country
@@ -39,6 +38,6 @@ from ECOMMERCE Group By COUNTRY;
 -- Query for all the Unique products name sold in each year
  
  Select DISTINCT(PRODUCTNAME) as UniqueProductName,
- Extract(YEAR From To_DATE("Date",'YYYY-MM-DD')) as "YEAR" FROM ECOMMERCE
- Order By Extract(YEAR From To_DATE("Date",'YYYY-MM-DD'));
+ Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')) as "YEAR" FROM ECOMMERCE
+ Order By Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD'));
 
