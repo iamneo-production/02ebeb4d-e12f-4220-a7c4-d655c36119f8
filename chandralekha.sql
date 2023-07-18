@@ -15,7 +15,7 @@ where purchase_date between '2019-02-01' and '2019-02-28';
 
 /* Query to Total sale amount in each year*/
 --
-set timimg on;
+set timing on;
 select sum(quantity*price),extract(year from to_date(purchase_date,'YYYY-MM-DD'))
 FROM ECOMMERCE 
 GROUP BY extract(year from to_date(purchase_date,'YYYY-MM-DD'));
@@ -28,7 +28,7 @@ from ecommerce group by substr(purchase_date,1,4);
 /*query to what was the total sales amount of each product 
 on a month-wise basis in the year 2019*/
 --
-set timimg on;
+set timing on;
 select productno,sum(quantity*price),substr(purchase_date,6,2) 
 from ecommerce 
 where substr(purchase_date,1,4)='2019'
