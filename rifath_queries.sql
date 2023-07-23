@@ -22,7 +22,7 @@ select sum(quantity*price),extract(year from to_date(purchase_date,'yyyy-mm-dd')
 from ecommerce group by extract(year from to_date(purchase_date,'yyyy-mm-dd'));
 
 select substr(purchase_date,1,4) as sales_year,sum(quantity*price) as totamount
-from ecommerce group by substr(purchase_date,1,4); --optimized--
+from ecommerce group by substr(purchase_date,1,4);                        /*optimized*/
 
 /* sql query to find out total sale amount of each product on month basis*/
 
@@ -34,7 +34,7 @@ order by month,PRODUCTNO;
 select substr(PURCHASE_DATE,6,2),productno,sum(price*QUANTITY)
 from ECOMMERCE where substr(purchase_date,1,4)='2019'
 group by substr(PURCHASE_DATE,6,2),
-PRODUCTNO order by substr(PURCHASE_DATE,6,2),PRODUCTNO; --opt--
+PRODUCTNO order by substr(PURCHASE_DATE,6,2),PRODUCTNO;           /*optimized*/
 
 select substr(PURCHASE_DATE,6,2),productno,sum(price*QUANTITY)
 from ECOMMERCE where PURCHASE_DATE like '2019-%'
