@@ -1,6 +1,6 @@
 /*select * from ecommerce*/ ;
 
-/*desc ECOMMERCE ; */
+/* desc ECOMMERCE ; */
 
 /*--------- 1 ----------*/
 
@@ -36,3 +36,5 @@ order by EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD'));
 
 select distinct(PRODUCTNAME),EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD')) AS YEAR from ECOMMERCE 
 order by EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD'));
+
+
