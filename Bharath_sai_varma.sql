@@ -102,3 +102,8 @@ order by EXTRACT(YEAR FROM TO_DATE(PURCHASE_DATE,'yyyy-mm-dd')),PRODUCTNAME;
 --optimized code--
 select distinct(substr(PURCHASE_DATE,1,4)),productname
 from ecommerce order by substr(PURCHASE_DATE,1,4),PRODUCTNAME;
+
+
+
+select * from ecommerce
+order by transactionno;
