@@ -1,6 +1,6 @@
 Select * from ECOMMERCE; /* query to retrive all columns*/ 
 
-SELECT country  FROM ECOMMERCE; /*query to know countries present in tha table*/
+SELECT country  FROM ECOMMERCE; /*query to know countries present in the table*/
 
 
 -- 1.Query to find how many products were sold in february 2019
