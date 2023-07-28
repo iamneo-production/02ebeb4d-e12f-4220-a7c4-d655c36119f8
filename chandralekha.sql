@@ -1,20 +1,9 @@
-select * from ecommerce;
-
-desc ecommerce; 
 
 -- 1. Query to Show How many products were sold in February 2019--
 --
 set timing on;
 select sum(quantity) from ECOMMERCE
 where PURCHASE_DATE >='2019-02-01' and PURCHASE_DATE<'2019-03-01'; --optimized--
-
-set timing on;
-select sum(quantity) from ecommerce 
-where purchase_date between '2019-02-01' and '2019-02-28'; 
-
-set timing on;
-select sum(quantity) from ECOMMERCE
-where purchase_date like '2019-02%';
 --
 
 
@@ -25,10 +14,6 @@ select sum(quantity*price) as totalsales,substr(purchase_date,1,4) as year
 from ecommerce 
 group by substr(purchase_date,1,4);      --optimized--
 
-set timing on;
-select sum(quantity*price) as totalsales,extract(year from to_date(purchase_date,'YYYY-MM-DD')) as year
-from ecommerce 
-group by extract(year from to_date(purchase_date,'YYYY-MM-DD'));
 --
 
 
@@ -42,22 +27,11 @@ where substr(purchase_date,1,4)='2019'
 group by substr(purchase_date,6,2),productno
 order by substr(purchase_date,6,2),productno;    --optimized--
 
-set timing on;
-select productno,sum(quantity*price) as totalsales,extract(month from to_date(PURCHASE_DATE,'yyyy-mm-dd')) as month
-from ecommerce 
-where extract(year from to_date(purchase_date,'yyyy-mm-dd'))= 2019
-group by extract(month from to_date(PURCHASE_DATE,'yyyy-mm-dd')),productno
-order by extract(month from to_date(PURCHASE_DATE,'yyyy-mm-dd')),productno;
 --
 
 
 -- 4. Query to Count the Customers from each country--
 --
-set timing on;
-select country,count(customerno) from ecommerce 
-group by country;
-
---Here the count includes the count of customers even if the customers has more than one transaction.--
 
 select country, count(distinct customerno) as customers
 from ecommerce
