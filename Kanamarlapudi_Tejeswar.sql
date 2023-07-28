@@ -2,27 +2,15 @@ select * from ECOMMERCE;
 
 desc ECOMMERCE;
 
-WITH index_data AS (
-    SELECT *
-    FROM user_indexes
-    WHERE index_name = 'INDEX_ON_DATE'
-)
-SELECT *
-FROM index_data;
-
 SELECT *
 FROM user_ind_columns
 WHERE index_name = 'INDEX_ON_DATE';
 
 set TIMING ON;
 
-
 /* 1.  write an sql query to how many products were sold in february 2019 ?*/
 select sum(quantity) from ecommerce 
 where purchase_date like '2019-02%';     
-
-select sum(quantity) total_products_sold from ECOMMERCE 
-where PURCHASE_DATE >= '2019-02-01' and PURCHASE_DATE <'2019-03-01';
 
 --optimized code
 select sum(quantity) from ecommerce where purchase_date between '2019-02-01'
@@ -72,13 +60,3 @@ SELECT EXTRACT(YEAR FROM TO_DATE(PURCHASE_DATE, 'YYYY-MM-DD')) AS sales_year, PR
 FROM ecommerce
 GROUP BY EXTRACT(YEAR FROM TO_DATE(PURCHASE_DATE, 'YYYY-MM-DD')) , PRODUCTNAME 
 order by EXTRACT(YEAR FROM TO_DATE(PURCHASE_DATE, 'YYYY-MM-DD')) ;
-
-
-
-
-
-
-
-
-
-
