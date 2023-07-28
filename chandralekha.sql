@@ -3,7 +3,7 @@
 --
 set timing on;
 select sum(quantity) from ECOMMERCE
-where PURCHASE_DATE >='2019-02-01' and PURCHASE_DATE<'2019-03-01'; --optimized--
+where PURCHASE_DATE >='2019-02-01' and PURCHASE_DATE<'2019-03-01'; 
 --
 
 
@@ -12,7 +12,7 @@ where PURCHASE_DATE >='2019-02-01' and PURCHASE_DATE<'2019-03-01'; --optimized--
 set timing on;
 select sum(quantity*price) as totalsales,substr(purchase_date,1,4) as year
 from ecommerce 
-group by substr(purchase_date,1,4);      --optimized--
+group by substr(purchase_date,1,4);      
 
 --
 
@@ -25,7 +25,7 @@ select productno,sum(quantity*price) as totalsales,substr(purchase_date,6,2) as 
 from ecommerce 
 where substr(purchase_date,1,4)='2019'
 group by substr(purchase_date,6,2),productno
-order by substr(purchase_date,6,2),productno;    --optimized--
+order by substr(purchase_date,6,2),productno;    
 
 --
 
@@ -37,27 +37,19 @@ select country, count(distinct customerno) as customers
 from ecommerce
 group by country;
  /* distinct keyword is used within 'count' function to make sure that each customer
-   is counted only once even when the have multiple transactions in the table.*/
+   is counted only once even when the customer have multiple transactions in the table.*/
 --
 
 
 --5. Query to list all the unique product names sold from each year--
 --
-set timing on;
-select distinct productname as unique_products,extract(YEAR FROM TO_DATE(purchase_date, 'YYYY-MM-DD')) as year 
-from ecommerce
-order by extract(YEAR FROM TO_DATE(purchase_date, 'YYYY-MM-DD')),productname;  --optimized--
 
 set timing on;
 select productname as unique_products,extract(YEAR FROM TO_DATE(purchase_date, 'YYYY-MM-DD')) as year 
 from ecommerce
 group by extract(YEAR FROM TO_DATE(purchase_date, 'YYYY-MM-DD')),productname
-order by extract(YEAR FROM TO_DATE(purchase_date, 'YYYY-MM-DD')),productname;  --optimized--
+order by extract(YEAR FROM TO_DATE(purchase_date, 'YYYY-MM-DD')),productname;  
 
-set timing on;
-select distinct productname,substr(purchase_date,1,4)
-from ecommerce
-order by productname,substr(purchase_date,1,4);
 --
 
 
