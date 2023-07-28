@@ -4,37 +4,39 @@
 
 /*--------- 1 ----------*/
 
-select count(*) as Sold_Products  from ECOMMERCE
-WHERE SUBSTR2("Date" ,1 ,7 ) = '2019-02';
+select sum(quantity) total_products_sold 
+from ECOMMERCE 
+where PURCHASE_DATE >= '2019-02-01' 
+and PURCHASE_DATE <'2019-03-01';
 
 /*---------- 2 ---------*/
 
-select SUM(Price*QUANTITY) as Total_Price from ECOMMERCE
-group by EXTRACT(YEAR FROM TO_DATE("Date", 'YYYY-MM-DD'));
-
+select substr(purchase_date, 1, 4) as sales_year , 
+sum(quantity * price) as total_sales_amount
+from ecommerce
+group by substr(purchase_date, 1, 4);            
 
 /*---------- 3 ---------*/
 
-select EXTRACT(Month FROM TO_DATE("Date", 'YYYY-MM-DD'))AS sales_month, PRODUCTNAME,
-SUM(PRICE * QUANTITY) AS total_sales_amount
-FROM ECOMMERCE
-WHERE EXTRACT(YEAR FROM TO_DATE("Date", 'YYYY-MM-DD')) = 2019
-GROUP BY EXTRACT(MONTH FROM TO_DATE("Date", 'YYYY-MM-DD')),PRODUCTNAME;
+select productno,substr(purchase_date,6,2) month ,
+sum(quantity*price) total_sales from ecommerce 
+where substr(purchase_date,1,4)='2019' 
+group by productno,substr(purchase_date,6,2);                         
+
+
 
 /*----------- 4 ----------*/
 
-select distinct country , count(*) from ECOMMERCE
-group by COUNTRY
-order by country;
+select country, count(distinct customerno) as customer_count
+from ecommerce
+group by country order by country; 
 
 /*------------ 5 ----------*/
 
-SELECT EXTRACT(YEAR FROM TO_DATE("Date", 'YYYY-MM-DD')) AS sales_year, PRODUCTNAME AS unique_product_names
-FROM ecommerce
-GROUP BY EXTRACT(YEAR FROM TO_DATE("Date", 'YYYY-MM-DD')) , PRODUCTNAME 
-order by EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD'));
-
-select distinct(PRODUCTNAME),EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD')) AS YEAR from ECOMMERCE 
-order by EXTRACT(year from TO_DATE("Date",'YYYY-MM-DD'));
+select extract(year from to_date(purchase_date, 'yyyy-mm-dd')) as sales_year, 
+productname as unique_product_names
+from ecommerce
+group by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) , productname 
+order by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) ;
 
 
