@@ -1,10 +1,9 @@
 -- 1.Query to find how many products were sold in february 2019
-SET TIMING ON;
-
+Set Timing ON;
 Select sum(QUANTITY) as TotalProductsSold FROM
- ECOMMERCE 
- WHERE PURCHASE_DATE >='2019-02-01'and 
-  PURCHASE_DATE<'2019-03-01'; 
+ECOMMERCE
+ WHERE PURCHASE_DATE>='2019-02-01' AND
+        PURCHASE_DATE<'2019-03-01';
  
 
         -- 2.Write a sql Query to Total sale amount in each year
@@ -32,11 +31,12 @@ Select sum(QUANTITY) as TotalProductsSold FROM
 
     --5 Write Query for all the Unique products name sold in each year
  
+
  Select PRODUCTNAME as UniqueProductName,
  Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')) as "SALES_YEAR" FROM ECOMMERCE
  group by  Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')),PRODUCTNAME
  Order By Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')); 
-
+ 
  
  
 
