@@ -26,7 +26,7 @@ Select sum(QUANTITY) as TotalProductsSold FROM
   --   4.write a sql query to count customers of each country
 
 
-   select COUNTRY,Count(Distinct(CUSTOMERNO)) as CUSTOMER_COUNT
+   Select COUNTRY,Count(Distinct(CUSTOMERNO)) as CUSTOMER_COUNT
    from ECOMMERCE Group By COUNTRY ; 
 
 
