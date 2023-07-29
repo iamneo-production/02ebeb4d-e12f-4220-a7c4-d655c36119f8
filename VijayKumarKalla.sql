@@ -27,7 +27,7 @@ Select sum(QUANTITY) as TotalProductsSold FROM
 
 
    select COUNTRY,Count(Distinct(CUSTOMERNO)) as CUSTOMER_COUNT
-   from ECOMMERCE Group By COUNTRY ; 
+   from ECOMMERCE Group By COUNTRY order by COUNTRY asc ; 
 
 
     --5 Write Query for all the Unique products name sold in each year
@@ -49,4 +49,4 @@ SELECT
   constant_year AS "SALES_YEAR"
 FROM CTE
 GROUP BY constant_year, PRODUCTNAME
-ORDER BY constant_year;
+ORDER BY constant_year asc;
