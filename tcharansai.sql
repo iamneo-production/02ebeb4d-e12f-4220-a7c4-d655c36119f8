@@ -52,5 +52,3 @@ productname as unique_product_names
 from ecommerce
 group by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) , productname 
 order by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) ;
-
-
