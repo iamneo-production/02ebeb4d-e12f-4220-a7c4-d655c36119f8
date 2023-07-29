@@ -1,6 +1,4 @@
 
--- desc ECOMMERCE ; 
-
 -- select query // run this first 
 -- SELECT
 --     TRANSACTIONNO,
