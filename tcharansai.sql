@@ -1,20 +1,20 @@
 
--- select query // run this first 
--- SELECT
---     TRANSACTIONNO,
---     PURCHASE_DATE,
---     PRODUCTNO,
---     PRODUCTNAME,
---     PRICE,
---     QUANTITY,
---     CUSTOMERNO,
---     COUNTRY
--- FROM
---     ECOMMERCE
--- WHERE
---     TRANSACTIONNO = 'VARCHAR2(50)';
+--select query run this first 
+--SELECT
+--    TRANSACTIONNO,
+--    PURCHASE_DATE,
+--    PRODUCTNO,
+--    PRODUCTNAME,
+--    PRICE,
+--    QUANTITY,
+--    CUSTOMERNO,
+--    COUNTRY
+--FROM
+--    ECOMMERCE
+--WHERE
+--    TRANSACTIONNO = 'VARCHAR2(50)';
 
--- My queries 
+--My queries 
 
 --  1
 
