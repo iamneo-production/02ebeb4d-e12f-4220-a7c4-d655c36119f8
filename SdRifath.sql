@@ -1,4 +1,3 @@
-/*select * from ECOMMERCE;*/
 
 -- 1.  write an sql query to how many products were sold in february 2019 ?
 
