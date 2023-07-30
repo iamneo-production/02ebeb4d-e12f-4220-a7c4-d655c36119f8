@@ -1,22 +1,3 @@
-
---select query run this first 
---SELECT
---    TRANSACTIONNO,
---    PURCHASE_DATE,
---    PRODUCTNO,
---    PRODUCTNAME,
---    PRICE,
---    QUANTITY,
---    CUSTOMERNO,
---    COUNTRY
---FROM
---    ECOMMERCE
---WHERE
---    TRANSACTIONNO = 'VARCHAR2(50)';
-
---My queries 
-
-
 --  1
 
 select sum(quantity) total_products_sold 
