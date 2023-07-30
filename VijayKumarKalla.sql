@@ -38,7 +38,7 @@ Select sum(QUANTITY) as TotalProductsSold FROM
 --  Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')) as "SALES_YEAR" FROM ECOMMERCE
 --  group by  Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')),PRODUCTNAME
 --  Order By Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')); 
-set timing on;
+
 WITH CTE AS (
   SELECT 
     PRODUCTNAME, 
