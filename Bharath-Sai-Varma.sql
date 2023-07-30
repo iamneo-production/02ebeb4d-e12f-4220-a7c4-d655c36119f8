@@ -5,6 +5,7 @@
 
 --  1
 
+
 select sum(quantity) total_products_sold 
 from ECOMMERCE 
 where PURCHASE_DATE >= '2019-02-01' 
