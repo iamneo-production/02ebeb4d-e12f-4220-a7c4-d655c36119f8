@@ -1,7 +1,7 @@
 
 -- 1.  write an sql query to how many products were sold in february 2019 ?
 
-select sum(quantity) as tot_products_sold from ECOMMERCE where PURCHASE_DATE >= '2019-02-01' and PURCHASE_DATE <'2019-03-01';
+select sum(quantity) as tot_productssold from ECOMMERCE where PURCHASE_DATE >= '2019-02-01' and PURCHASE_DATE <'2019-03-01';
 
 --2. write an sql query to total sales amount in each year ? 
 
@@ -19,14 +19,15 @@ group by productno,substr(PURCHASE_DATE,6,2);
 
 SELECT country, COUNT(DISTINCT CUSTOMERNO) AS customer_count
 FROM ECOMMERCE
-GROUP BY country order by country;
+GROUP BY country order by country ASC;
 
 -- 5. write an sql query to list all unique product names sold from each year?
-
-select extract(year from to_date(purchase_date, 'yyyy-mm-dd')) as sales_year, 
-productname as unique_product_names
-from ecommerce
-group by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) , productname 
-order by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) ;  
+with CTE AS
+(
+SELECT PRODUCTNAME,EXTRACT(YEAR FROM TO_DATE("PURCHASE_DATE",'YYYY-MM-DD')) AS SALES_YEAR 
+FROM ECOMMERCE
+)
+SELECT DISTINCT(PRODUCTNAME) AS UNIQUEPRODUCT_NAME,SALES_YEAR FROM CTE
+GROUP BY SALES_YEAR,PRODUCTNAME ORDER BY SALES_YEAR asc; 
 
 
