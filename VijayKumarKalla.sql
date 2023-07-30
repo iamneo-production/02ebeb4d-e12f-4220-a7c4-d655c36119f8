@@ -1,53 +1,55 @@
--- 1.Query to find how many products were sold in february 2019
-SET TIMING ON;
 
-Select sum(QUANTITY) as TotalProductsSold FROM
- ECOMMERCE 
- WHERE PURCHASE_DATE >='2019-02-01'and 
-  PURCHASE_DATE<'2019-03-01'; 
- 
+--select query run this first 
+--SELECT
+--    TRANSACTIONNO,
+--    PURCHASE_DATE,
+--    PRODUCTNO,
+--    PRODUCTNAME,
+--    PRICE,
+--    QUANTITY,
+--    CUSTOMERNO,
+--    COUNTRY
+--FROM
+--    ECOMMERCE
+--WHERE
+--    TRANSACTIONNO = 'VARCHAR2(50)';
 
-        -- 2.Write a sql Query to Total sale amount in each year
-
-    SELECT SUBSTR(PURCHASE_DATE,1,4) as "YEAR" ,
-    sum(PRICE*QUANTITY) as TotalSalesAmount 
-    from ECOMMERCE
-    group by SUBSTR(PURCHASE_DATE,1,4); 
-
-
-    --3.Write a sql Query to find what was the total sales amount of each product on a month wise basis in 2019   
-
- Select PRODUCTNO,SUBSTR(PURCHASE_DATE,6,2) as "Month",
-  sum(PRICE*QUANTITY) as TOTAL_SALES_AMOUNT from ECOMMERCE
-  where SUBSTR(PURCHASE_DATE,1,4)='2019' 
-  group by PRODUCTNO,SUBSTR(PURCHASE_DATE,6,2);
-
-              
-  --   4.write a sql query to count customers of each country
+--My queries 
 
 
-   select COUNTRY,Count(Distinct(CUSTOMERNO)) as CUSTOMER_COUNT
-   from ECOMMERCE Group By COUNTRY order by COUNTRY asc ; 
+--  1
+
+select sum(quantity) total_products_sold 
+from ECOMMERCE 
+where PURCHASE_DATE >= '2019-02-01' 
+and PURCHASE_DATE <'2019-03-01';
+
+-- 2 
+
+select substr(purchase_date, 1, 4) as sales_year , 
+sum(quantity * price) as total_sales_amount
+from ecommerce
+group by substr(purchase_date, 1, 4);            
+
+-- 3 
+
+select productno,substr(purchase_date,6,2) month ,
+sum(quantity*price) total_sales from ecommerce 
+where substr(purchase_date,1,4)='2019' 
+group by productno,substr(purchase_date,6,2);                         
 
 
-    -- 5 Write Query for all the Unique products name sold in each year
 
- 
+-- 4
 
---  Select PRODUCTNAME as UniqueProductName,
---  Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')) as "SALES_YEAR" FROM ECOMMERCE
---  group by  Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')),PRODUCTNAME
---  Order By Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')); 
+select country, count(distinct customerno) as customer_count
+from ecommerce
+group by country order by country; 
 
-WITH CTE AS (
-  SELECT 
-    PRODUCTNAME, 
-    Extract(YEAR From To_DATE("PURCHASE_DATE", 'YYYY-MM-DD')) AS SALES_YEAR
-  FROM ECOMMERCE
-)
-SELECT 
-  Distinct(PRODUCTNAME) AS UniqueProductName,
-  SALES_YEAR
-FROM CTE
-GROUP BY SALES_YEAR, PRODUCTNAME
-ORDER BY SALES_YEAR asc;
+-- 5
+
+select extract(year from to_date(purchase_date, 'yyyy-mm-dd')) as sales_year, 
+productname as unique_product_names
+from ecommerce
+group by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) , productname 
+order by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) ;
