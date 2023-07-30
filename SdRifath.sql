@@ -23,7 +23,7 @@ GROUP BY country order by country;
 
 -- 5. write an sql query to list all unique product names sold from each year?
 
-select distinct productname as unique_product, substr(purchase_date,1,4) as year
+select distinct productname as unique_prod, substr(purchase_date,1,4) as year
 from ecommerce group by substr(purchase_date,1,4),productname
 order by substr(purchase_date,1,4);
 
