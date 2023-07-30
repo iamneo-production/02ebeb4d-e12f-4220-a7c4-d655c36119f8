@@ -30,9 +30,10 @@ Select sum(QUANTITY) as TotalProductsSold FROM
    from ECOMMERCE Group By COUNTRY order by COUNTRY asc ; 
 
 
-    --5 Write Query for all the Unique products name sold in each year
+    -- 5 Write Query for all the Unique products name sold in each year
 
---  set timing on;
+ 
+
 --  Select PRODUCTNAME as UniqueProductName,
 --  Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')) as "SALES_YEAR" FROM ECOMMERCE
 --  group by  Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')),PRODUCTNAME
