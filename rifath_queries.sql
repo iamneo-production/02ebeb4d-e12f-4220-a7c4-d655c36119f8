@@ -1,64 +1,30 @@
 /*select * from ECOMMERCE;*/
 
-/* 1.sql query to how many products were sold in feb 2019*/
+-- 1.  write an sql query to how many products were sold in february 2019 ?
 
-select sum(quantity) from ECOMMERCE
-where extract(year from to_Date(purchase_date, 'yyyy-mm-dd'))
-=2019 and extract(month from to_date(purchase_date, 'yyyy-mm-dd'))=02;
+select sum(quantity) as tot_products_sold from ECOMMERCE where PURCHASE_DATE >= '2019-02-01' and PURCHASE_DATE <'2019-03-01';
 
-select sum(quantity) from ecommerce where purchase_date like '2019-02%';
+--2. write an sql query to total sales amount in each year ? 
 
-select sum(quantity) from ecommerce where purchase_date between '2019-02-01'
-and '2019-02-29';     /*optimized*/
+SELECT SUBSTR(purchase_date, 1, 4) AS sale_year, SUM(quantity * price) AS tot_sale_amount
+FROM ECOMMERCE
+GROUP BY SUBSTR(purchase_date, 1, 4);
 
-select sum(quantity) from ecommerce where substr(purchase_date,1,7)='2019-02';
+-- 3. write a sql query to what was the total sales amount of each product on a month-wise in the year 2019 ?
 
-/* 2.sql query to find out total sale amount in each year*/
+select PRODUCTNO,SUBSTR(PURCHASE_DATE,6,2) as month, sum(quantity*price) tot_sale from ECOMMERCE
+where substr(PURCHASE_DATE,1,4)='2019' 
+group by productno,substr(PURCHASE_DATE,6,2);
 
-select sum(quantity*price),extract(year from to_date(substr(purchase_date,1,4),'yyyy')) 
-from ecommerce  group by extract(year from to_date(substr(purchase_date,1,4),'yyyy'));
+--4. write a sql query to count cutomers from each country?
 
-select sum(quantity*price),extract(year from to_date(purchase_date,'yyyy-mm-dd'))
-from ecommerce group by extract(year from to_date(purchase_date,'yyyy-mm-dd'));
+SELECT country, COUNT(DISTINCT CUSTOMERNO) AS customer_count
+FROM ECOMMERCE
+GROUP BY country order by country;
 
-select substr(purchase_date,1,4) as sales_year,sum(quantity*price) as totamount
-from ecommerce group by substr(purchase_date,1,4);                        /*optimized*/
+-- 5. write an sql query to list all unique product names sold from each year?
 
-/* 3.sql query to find out total sale amount of each product on month basis*/
+select distinct productname as unique_product, substr(purchase_date,1,4) as year
+from ecommerce group by substr(purchase_date,1,4),productname
+order by substr(purchase_date,1,4);
 
-select extract(month from to_date(PURCHASE_DATE,'yyyy-mm-dd')) as month,productno,sum(price*QUANTITY) from ecommerce 
-where extract(year from to_date(purchase_date,'yyyy-mm-dd'))=2019
-group by extract(month from to_date(PURCHASE_DATE,'yyyy-mm-dd')),PRODUCTNO
-order by month,PRODUCTNO;
-
-select substr(PURCHASE_DATE,6,2),productno,sum(price*QUANTITY)
-from ECOMMERCE where substr(purchase_date,1,4)='2019'
-group by substr(PURCHASE_DATE,6,2),
-PRODUCTNO order by substr(PURCHASE_DATE,6,2),PRODUCTNO;           /*optimized*/
-
-select substr(PURCHASE_DATE,6,2),productno,sum(price*QUANTITY)
-from ECOMMERCE where PURCHASE_DATE like '2019-%'
-group by substr(PURCHASE_DATE,6,2),PRODUCTNO
-order by substr(PURCHASE_DATE,6,2),PRODUCTNO;
-
-/* 4.sql query to count the customers from each country*/
-
-SELECT country, COUNT(DISTINCT customerno) 
-FROM ecommerce
-GROUP BY country;               /*optimized*/
-
-/* 5.sql query to list all the unique product names sold from each year*/
-
-select distinct(extract(year from to_date(purchase_date,'yyyy-mm-dd'))),
-PRODUCTNAME from ECOMMERCE order by
-extract(year from to_date(purchase_date,'yyyy-mm-dd')),productname;
-
-
-select distinct(substr(PURCHASE_DATE,1,4)),productname
-from ecommerce order by substr(PURCHASE_DATE,1,4),PRODUCTNAME;  
-
-
-select extract(year from to_date(PURCHASE_DATE,'yyyy-mm-dd')),productname
-from ecommerce
-group by extract(year from to_date(PURCHASE_DATE,'yyyy-mm-dd')),productname
-order by EXTRACT(YEAR FROM TO_DATE(PURCHASE_DATE,'yyyy-mm-dd')),PRODUCTNAME;         /*optimized*/
