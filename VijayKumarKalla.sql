@@ -42,12 +42,12 @@ Select sum(QUANTITY) as TotalProductsSold FROM
 WITH CTE AS (
   SELECT 
     PRODUCTNAME, 
-    Extract(YEAR From To_DATE("PURCHASE_DATE", 'YYYY-MM-DD')) AS constant_year
+    Extract(YEAR From To_DATE("PURCHASE_DATE", 'YYYY-MM-DD')) AS SALES_YEAR
   FROM ECOMMERCE
 )
 SELECT 
-  PRODUCTNAME AS UniqueProductName,
-  constant_year AS "SALES_YEAR"
+  Distinct(PRODUCTNAME) AS UniqueProductName,
+  SALES_YEAR
 FROM CTE
-GROUP BY constant_year, PRODUCTNAME
-ORDER BY constant_year asc;
+GROUP BY SALES_YEAR, PRODUCTNAME
+ORDER BY SALES_YEAR asc;
