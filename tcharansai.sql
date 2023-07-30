@@ -1,6 +1,5 @@
 --  1
-Select sum(QUANTITY) as TotalSold FROM ECOMMERCE 
-WHERE 
+Select sum(QUANTITY) as TotalSold FROM ECOMMERCE WHERE 
 PURCHASE_DATE >='2019-02-01'and 
 PURCHASE_DATE<'2019-03-01'; 
 -- 2 
