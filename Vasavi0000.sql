@@ -3,9 +3,10 @@
 
 	SET TIMING ON;
 
+
 	Select sum(QUANTITY) as TotalProductsSold FROM
  	ECOMMERCE 
- 	WHERE PURCHASE_DATE >='2019-02-01'and 
+	WHERE PURCHASE_DATE >='2019-02-01'and 
   	PURCHASE_DATE<'2019-03-01'; 
 
 
@@ -52,7 +53,3 @@ WITH CTE AS (
 	ORDER BY SALES_YEAR asc;
 
 
---  Select PRODUCTNAME as UniqueProductName,
---  Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')) as "SALES_YEAR" FROM ECOMMERCE
---  group by  Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD')),PRODUCTNAME
---  Order By Extract(YEAR From To_DATE("PURCHASE_DATE",'YYYY-MM-DD'));
