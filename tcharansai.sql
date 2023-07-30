@@ -18,6 +18,7 @@
 
 
 
+
 --  1
 
 select sum(quantity) total_products_sold 
