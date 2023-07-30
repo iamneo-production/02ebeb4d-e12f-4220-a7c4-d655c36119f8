@@ -8,6 +8,7 @@
   	PURCHASE_DATE<'2019-03-01'; 
  
 
+
     -- 2.Write a sql Query to Total sale amount in each year
 
     	SELECT SUBSTR(PURCHASE_DATE,1,4) as "YEAR" ,
