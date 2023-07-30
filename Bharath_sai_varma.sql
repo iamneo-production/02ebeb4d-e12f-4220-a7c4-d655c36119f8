@@ -24,7 +24,7 @@
 
 --4.Write the SQL query to count the customers from each country
 
-	select country,count(distinct customerno)
+	select country,count(distinct customerno) as no_of_customers
 	from ecommerce
 	group by country;
 
