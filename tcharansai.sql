@@ -16,6 +16,8 @@
 
 --My queries 
 
+
+
 --  1
 
 select sum(quantity) total_products_sold 
