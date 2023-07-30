@@ -31,5 +31,5 @@ ORDER BY
 select extract(year from to_date(purchase_date, 'yyyy-mm-dd')) as sales_year, 
 productname as unique_product_names
 from ecommerce
-group by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) , productname 
-order by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) ;
+group by sales_year , productname 
+order by sales_year ASC ;
