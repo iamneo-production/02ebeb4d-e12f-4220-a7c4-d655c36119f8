@@ -27,8 +27,9 @@ GROUP BY country order by country;
 
 -- 5. write an sql query to list all unique product names sold from each year?
 
-SELECT EXTRACT(YEAR FROM TO_DATE(PURCHASE_DATE, 'YYYY-MM-DD')) AS sales_year, PRODUCTNAME AS unique_product_names
-FROM ecommerce
-GROUP BY EXTRACT(YEAR FROM TO_DATE(PURCHASE_DATE, 'YYYY-MM-DD')) , PRODUCTNAME 
-order by EXTRACT(YEAR FROM TO_DATE(PURCHASE_DATE, 'YYYY-MM-DD')) ;
+select extract(year from to_date(purchase_date, 'yyyy-mm-dd')) as sales_year, 
+productname as unique_product_names
+from ecommerce
+group by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) , productname 
+order by extract(year from to_date(purchase_date, 'yyyy-mm-dd')) ;   
 
