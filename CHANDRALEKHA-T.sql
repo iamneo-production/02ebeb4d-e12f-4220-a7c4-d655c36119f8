@@ -21,8 +21,8 @@ where substr(purchase_date,1,4)='2019' group by substr(purchase_date,6,2),produc
 
 
 select country, count(distinct customerno) as customers
-from ecommerce
-group by country ASC;
+from ecommerce group by country
+order by country ASC;
  /* distinct keyword is used within 'count' function to make sure that each customer
    is counted only once even when the customer have multiple transactions in the table.*/
 
